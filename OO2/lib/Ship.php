@@ -2,6 +2,8 @@
 
 class Ship
 {
+    private $id;
+
     private $name;
 
     private $weaponPower = 0;
@@ -33,11 +35,11 @@ class Ship
     {
         return $this->name;
     }
-    
+
     public function setStrength($number)
     {
         if (!is_numeric($number)) {
-            throw new \Exception('Invalid strength passed '.$number);
+            throw new \Exception('Strength must be a number, duh!');
         }
 
         $this->strength = $number;
@@ -113,4 +115,22 @@ class Ship
     {
         $this->jediFactor = $jediFactor;
     }
+
+    /**
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param integer $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+
 }
