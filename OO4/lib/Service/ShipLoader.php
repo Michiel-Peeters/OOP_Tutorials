@@ -1,5 +1,13 @@
 <?php
 
+namespace Service;
+
+use Model\AbstractShip;
+use Model\BountyHunterShip;
+use Model\RebelShip;
+use Model\Ship;
+use Model\ShipCollection;
+
 class ShipLoader
 {
     private $shipStorage;
@@ -10,7 +18,7 @@ class ShipLoader
     }
 
     /**
-     * @return AbstractShip[]
+     * @return ShipCollection
      */
     public function getShips()
     {
@@ -22,12 +30,14 @@ class ShipLoader
             $ships[] = $this->createShipFromData($shipData);
         }
 
-        return $ships;
+        $ships[] = new BountyHunterShip('Slave I');
+
+        return new ShipCollection($ships);
     }
 
     /**
      * @param $id
-     * @return AbstractShip
+     * @return RebelShip|Ship|AbstractShip
      */
     public function findOneById($id)
     {
@@ -38,7 +48,7 @@ class ShipLoader
 
     private function createShipFromData(array $shipData)
     {
-        if ($shipData['team'] == 'rebel') {
+        if ($shipData['team'] === 'rebel') {
             $ship = new RebelShip($shipData['name']);
         } else {
             $ship = new Ship($shipData['name']);

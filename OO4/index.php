@@ -1,6 +1,10 @@
 <?php
 require __DIR__ . '/bootstrap.php';
 
+use Model\BrokenShip;
+use Service\BattleManager;
+use Service\Container;
+
 $container = new Container($configuration);
 
 $shipLoader = $container->getShipLoader();
@@ -8,6 +12,8 @@ $ships = $shipLoader->getShips();
 
 $brokenShip = new BrokenShip('I am so broken');
 $ships[] = $brokenShip;
+
+$ships->removeAllBrokenShips();
 
 
 $battleTypes = BattleManager::getAllBattleTypesWithDescription();
